@@ -53,11 +53,15 @@ LOG_SETTINGS = {
     
     "formatters": {
         "standard": {
-            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            "format": "%(asctime)s | %(levelname)-8s | %(name)-15s | %(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S"
         },
         "verbose": {
-            "format": "%(asctime)s [%(levelname)s] %(module)s.%(funcName)s:%(lineno)d - %(message)s"
+            "format": "%(asctime)s | %(levelname)-8s | %(module)-15s | %(funcName)-20s:%(lineno)-4d | %(message)s"
+        },
+        "json": {
+            "()": "pythonjsonlogger.jsonlogger.JsonFormatter",
+            "fmt": "%(asctime)s %(levelname)s %(name)s %(module)s %(funcName)s %(lineno)s %(message)s"
         }
     },
     
@@ -89,6 +93,14 @@ LOG_SETTINGS = {
             "maxBytes": 1024*1024*5,
             "backupCount": 3,
             "formatter": "standard",
+            "level": "INFO"
+        },
+        "file_json": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "logs/structured.log",
+            "maxBytes": 1024*1024*5,
+            "backupCount": 3,
+            "formatter": "json",
             "level": "INFO"
         }
     },

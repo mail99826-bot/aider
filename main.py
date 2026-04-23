@@ -178,7 +178,14 @@ class ScalpingBot:
                 return False
 
         except Exception as e:
-            print(f"❌ Ошибка выполнения покупки: {e}")
+            error_context = {
+                "error": str(e),
+                "type": "buy_order_failed",
+                "price": price,
+                "balance": self.exchange.get_balance(),
+                "position": self.current_position
+            }
+            self.logger.error("Ошибка выполнения покупки", extra=error_context)
             self.notifier.send_error_notification(f"Ошибка покупки: {e}")
             return False
 
