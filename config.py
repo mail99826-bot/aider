@@ -6,7 +6,8 @@ OKX_CONFIG = {
     'apiKey': 'YOUR_API_KEY',
     'secret': 'YOUR_SECRET_KEY',
     'password': 'YOUR_PASSPHRASE',
-    'enableRateLimit': True
+    'enableRateLimit': True,
+    'test': True  # Использование демо-счета
 }
 
 # Настройки Telegram

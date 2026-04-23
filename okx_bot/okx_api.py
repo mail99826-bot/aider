@@ -9,6 +9,13 @@ class OKXAPI:
         self.exchange = ccxt.okx(OKX_CONFIG)
         self.notifier = TelegramNotifier()
         self._validate_connection()
+        self._check_demo_mode()
+
+    def _check_demo_mode(self):
+        """Проверка работы на демо-счете"""
+        if self.exchange.urls['test']:
+            logger.log('system', 'Running in DEMO mode')
+            self.notifier.send_message("🟡 Бот работает на ДЕМО-счете")
 
     def _validate_connection(self):
         """Проверка подключения к бирже"""
