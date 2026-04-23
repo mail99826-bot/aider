@@ -9,6 +9,10 @@ from datetime import datetime
 
 from config import *
 
+# Константы для форматирования логов
+LOG_FORMAT = "%(asctime)s | %(levelname)-8s | %(name)-15s | %(message)s"
+LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+
 
 class TradeLogger:
     def __init__(self):
