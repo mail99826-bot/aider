@@ -412,9 +412,9 @@ class ScalpingBot:
 
 if __name__ == "__main__":
     """Запуск бота"""
-    self.logger.log_info("🚀 SCALPING BOT FOR OKX")
-    self.logger.log_info("Version 1.0")
-    self.logger.log_info("")
+    print("🚀 SCALPING BOT FOR OKX")
+    print("Version 1.0")
+    print("")
 
     bot = ScalpingBot()
     bot.run()
