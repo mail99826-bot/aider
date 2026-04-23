@@ -54,7 +54,7 @@ LOG_SETTINGS = {
     
     "formatters": {
         "standard": {
-            "format": "%(asctime)s | %(levelname)-8s | %(name)-15s | %(message)s",
+            "format": "%(asctime)s | %(levelname)-8s | %(name)-15s | %(message)s | %(params)s",
             "datefmt": "%Y-%m-%d %H:%M:%S"
         },
         "verbose": {

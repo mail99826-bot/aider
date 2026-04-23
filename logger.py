@@ -47,11 +47,12 @@ class TradeLogger:
         # Для обратной совместимости оставляем основной логгер
         self.log_file = "logs/general.log"
 
-        # Настройка формата логов
+        # Настройка формата логов с поддержкой extra данных
         self.log_format = logging.Formatter(
-            "%(asctime)s | %(levelname)-8s | %(name)-15s | %(message)s",
+            "%(asctime)s | %(levelname)-8s | %(name)-15s | %(message)s | %(params)s",
             datefmt="%Y-%m-%d %H:%M:%S"
         )
+        self.log_format.defaults = {"params": ""}  # Значение по умолчанию
 
         # Создаем логгер
         self.logger = logging.getLogger("scalping_bot")
@@ -150,12 +151,19 @@ class TradeLogger:
         self.error_logger.error(f"[GENERAL] {message}")
         self.logger.error(message)
 
-    def log_info(self, info_message):
+    def log_info(self, info_message, extra=None):
         """
         Логирование информационного сообщения
+        Args:
+            info_message: Текст сообщения
+            extra: Дополнительные данные для логирования (dict)
         """
-        self.bot_logger.info(info_message)
-        self.logger.info(info_message)
+        if extra:
+            self.bot_logger.info(info_message, extra=extra)
+            self.logger.info(info_message, extra=extra)
+        else:
+            self.bot_logger.info(info_message)
+            self.logger.info(info_message)
 
     def log_stats(self, stats_data):
         """
