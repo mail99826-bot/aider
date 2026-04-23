@@ -1,5 +1,5 @@
 import requests
-from ..config import TELEGRAM_CONFIG
+from okx_bot.config import TELEGRAM_CONFIG
 from okx_bot.logger import logger
 
 class TelegramNotifier:

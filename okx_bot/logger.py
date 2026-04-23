@@ -2,7 +2,7 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 from datetime import datetime
-from ..config import LOG_CONFIG
+from okx_bot.config import LOG_CONFIG
 
 class BotLogger:
     def __init__(self):

@@ -2,7 +2,7 @@ import time
 from okx_bot.okx_api import OKXAPI
 from okx_bot.logger import logger
 from okx_bot.telegram_notifier import TelegramNotifier
-from ..config import BOT_CONFIG
+from okx_bot.config import BOT_CONFIG
 
 class ScalpingBot:
     def __init__(self):
