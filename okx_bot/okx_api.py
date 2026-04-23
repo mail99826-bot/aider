@@ -1,6 +1,6 @@
 import ccxt
 from ccxt import NetworkError, ExchangeError
-from config import OKX_CONFIG
+from ..config import OKX_CONFIG
 from okx_bot.logger import logger
 from okx_bot.telegram_notifier import TelegramNotifier
 
