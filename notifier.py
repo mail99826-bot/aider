@@ -23,12 +23,16 @@ class TelegramNotifier:
         else:
             print("⚠️  Telegram бот не настроен (проверьте .env файл)")
 
-    def send_message(self, text, max_retries=3):
+    def send_message(self, text, max_retries=3, level="info"):
         """
         Отправка текстового сообщения в Telegram с повторными попытками
+        Args:
+            text: Текст сообщения
+            max_retries: Максимальное количество попыток
+            level: Уровень важности (info, warning, error)
         """
         if not self.bot_token or not self.chat_id:
-            print("⏭️  Telegram не настроен, пропускаем уведомление")
+            self.logger.log_info("Telegram не настроен, пропускаем уведомление")
             return False
 
         for attempt in range(max_retries):
@@ -40,19 +44,17 @@ class TelegramNotifier:
                 response = requests.post(url, data=payload, timeout=30)
                 response.raise_for_status()
 
-                print(f"✅ Уведомление отправлено в Telegram (попытка {attempt + 1})")
+                self.logger.log_info(f"Уведомление отправлено в Telegram (попытка {attempt + 1})")
                 return True
 
             except requests.exceptions.RequestException as e:
-                print(
-                    f"❌ Ошибка отправки в Telegram (попытка {attempt + 1}/{max_retries}): {e}"
-                )
+                error_msg = f"Ошибка отправки в Telegram (попытка {attempt + 1}/{max_retries}): {e}"
+                self.logger.log_error(error_msg)
+                
                 if attempt < max_retries - 1:
-                    time.sleep(2)  # Ждем 2 секунды перед повторной попыткой
+                    time.sleep(2)
                 else:
-                    print(
-                        f"⚠️  Не удалось отправить сообщение после {max_retries} попыток"
-                    )
+                    self.logger.log_warning(f"Не удалось отправить сообщение после {max_retries} попыток")
                     return False
 
     def send_order_notification(

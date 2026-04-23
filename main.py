@@ -17,8 +17,9 @@ from strategy import TradingStrategy
 class ScalpingBot:
     def __init__(self):
         """Инициализация бота"""
-        print("🚀 ИНИЦИАЛИЗАЦИЯ SCALPING БОТА")
-        print("=" * 50)
+        self.logger.log_info("=" * 50)
+        self.logger.log_info("🚀 ИНИЦИАЛИЗАЦИЯ SCALPING БОТА")
+        self.logger.log_info("=" * 50)
 
         # Инициализация компонентов
         self.logger = TradeLogger()  # Сначала создаем логгер
@@ -39,8 +40,9 @@ class ScalpingBot:
         signal.signal(signal.SIGINT, self.signal_handler)
         signal.signal(signal.SIGTERM, self.signal_handler)
 
-        print("=" * 50)
-        print("✅ Бот инициализирован и готов к работе!\n")
+        self.logger.log_info("=" * 50)
+        self.logger.log_info("✅ Бот инициализирован и готов к работе!")
+        self.logger.log_info("")
 
     def signal_handler(self, sig, frame):
         """Обработка сигнала завершения"""
@@ -49,7 +51,7 @@ class ScalpingBot:
 
     def stop(self):
         """Корректное завершение работы бота"""
-        print("\n🛑 Завершение работы бота...")
+        self.logger.log_info("\n🛑 Завершение работы бота...")
         self.is_running = False
 
         # Закрытие позиций
@@ -65,13 +67,13 @@ class ScalpingBot:
 
     def close_all_positions(self):
         """Закрытие всех открытых позиций"""
-        print("🔄 Закрытие всех позиций...")
+        self.logger.log_info("🔄 Закрытие всех позиций...")
         try:
             self.exchange.close_all_positions()
             self.current_position = None
-            print("✅ Все позиции закрыты")
+            self.logger.log_info("✅ Все позиции закрыты")
         except Exception as e:
-            print(f"❌ Ошибка при закрытии позиций: {e}")
+            self.logger.log_error(f"Ошибка при закрытии позиций: {e}")
 
     def initialize_account(self):
         """Инициализация аккаунта"""
