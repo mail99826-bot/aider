@@ -17,12 +17,15 @@ from strategy import TradingStrategy
 class ScalpingBot:
     def __init__(self):
         """Инициализация бота"""
+        # Сначала инициализируем логгер
+        self.logger = TradeLogger()
+
+        # Затем используем его
         self.logger.log_info("=" * 50)
-        self.logger.log_info("🚀 ИНИЦИАЛИЗАЦИЯ SCALPING БОТА")
+        self.logger.log_info("🚀 ИНИЦИАЛИЗАЦИЯ SCALPING БОТA")
         self.logger.log_info("=" * 50)
 
         # Инициализация компонентов
-        self.logger = TradeLogger()  # Сначала создаем логгер
         self.exchange = ExchangeClient(self.logger)  # Передаем логгер в ExchangeClient
         self.strategy = TradingStrategy(self.logger)  # Передаем логгер в стратегию
         self.risk_manager = RiskManager(
