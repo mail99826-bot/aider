@@ -94,8 +94,13 @@ class ScalpingBot:
             return True
 
         except Exception as e:
-            print(f"❌ Ошибка инициализации аккаунта: {e}")
-            self.notifier.send_error_notification(f"Ошибка инициализации: {e}")
+            error_msg = f"Ошибка инициализации аккаунта: {e}"
+            self.logger.log_error(error_msg)
+            self.logger.log_stats({
+                "error": "account_init_failed",
+                "message": str(e)
+            })
+            self.notifier.send_error_notification(error_msg)
             return False
 
     def check_current_position(self):
@@ -126,10 +131,22 @@ class ScalpingBot:
             amount = self.risk_manager.calculate_position_size(balance, price)
 
             if amount <= 0:
-                print("⏭️  Размер позиции слишком мал, пропускаем")
+                self.logger.log_info("Размер позиции слишком мал, пропускаем")
+                self.logger.log_stats({
+                    "action": "skip_trade",
+                    "reason": "position_size_too_small",
+                    "balance": balance,
+                    "price": price
+                })
                 return False
 
-            print(f"🟢 BUY: {amount} контрактов по цене ~{price:.2f}")
+            self.logger.log_info(f"BUY: {amount} контрактов по цене ~{price:.2f}")
+            self.logger.log_stats({
+                "action": "buy_signal",
+                "amount": amount,
+                "price": price,
+                "balance": balance
+            })
 
             # Размещаем рыночный ордер
             order = self.exchange.place_market_order("buy", amount)
@@ -304,8 +321,8 @@ class ScalpingBot:
 
     def run(self):
         """Главный цикл бота"""
-        print("▶️  ЗАПУСК ГЛАВНОГО ЦИКЛА")
-        print("=" * 50)
+        self.logger.log_info("▶️  ЗАПУСК ГЛАВНОГО ЦИКЛА")
+        self.logger.log_info("=" * 50)
 
         # Инициализация аккаунта
         if not self.initialize_account():
@@ -318,7 +335,7 @@ class ScalpingBot:
             try:
                 iteration += 1
                 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                print(f"\n🔄 Итерация {iteration} | {current_time}")
+                self.logger.log_info(f"\n🔄 Итерация {iteration} | {current_time}")
 
                 # 1. Получение текущей цены
                 current_price = self.exchange.get_current_price()
@@ -388,9 +405,9 @@ class ScalpingBot:
 
 if __name__ == "__main__":
     """Запуск бота"""
-    print("🚀 SCALPING BOT FOR OKX")
-    print("Version 1.0")
-    print()
+    self.logger.log_info("🚀 SCALPING BOT FOR OKX")
+    self.logger.log_info("Version 1.0")
+    self.logger.log_info("")
 
     bot = ScalpingBot()
     bot.run()

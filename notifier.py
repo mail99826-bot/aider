@@ -19,9 +19,9 @@ class TelegramNotifier:
         self.logger = logger or TradeLogger()
 
         if self.bot_token and self.chat_id:
-            print("📱 Telegram бот инициализирован")
+            self.logger.log_info("📱 Telegram бот инициализирован")
         else:
-            print("⚠️  Telegram бот не настроен (проверьте .env файл)")
+            self.logger.log_warning("Telegram бот не настроен (проверьте .env файл)")
 
     def send_message(self, text, max_retries=3, level="info"):
         """
