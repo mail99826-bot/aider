@@ -47,6 +47,7 @@ TAKE_PROFIT_PERCENT = 1.0  # Тейк-xрофит 1.0% для скальпинг
 RISK_PER_TRADE = 0.01  # Риск 1% на сделку
 
 # Настройки логирования
+LOG_FILE = "logs/general.log"  # Основной файл логов
 LOG_SETTINGS = {
     "version": 1,
     "disable_existing_loggers": False,
