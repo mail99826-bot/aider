@@ -44,10 +44,13 @@ class TradeLogger:
         )
 
         # Для обратной совместимости оставляем основной логгер
-        self.log_file = LOG_FILE
+        self.log_file = "logs/general.log"
 
         # Настройка формата логов
-        self.log_format = logging.Formatter(LOG_FORMAT, datefmt=LOG_DATE_FORMAT)
+        self.log_format = logging.Formatter(
+            "%(asctime)s | %(levelname)-8s | %(name)-15s | %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        )
 
         # Создаем логгер
         self.logger = logging.getLogger("scalping_bot")
