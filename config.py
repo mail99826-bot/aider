@@ -47,10 +47,70 @@ TAKE_PROFIT_PERCENT = 1.0  # Тейк-xрофит 1.0% для скальпинг
 RISK_PER_TRADE = 0.01  # Риск 1% на сделку
 
 # Настройки логирования
-LOG_FILE = "logs/general.log"  # Общий лог всех событий
-LOG_LEVEL = "INFO"
-LOG_FORMAT = "%(asctime)s | %(levelname)s | %(message)s"
-LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+LOG_SETTINGS = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S"
+        },
+        "verbose": {
+            "format": "%(asctime)s [%(levelname)s] %(module)s.%(funcName)s:%(lineno)d - %(message)s"
+        }
+    },
+    
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+            "level": "INFO"
+        },
+        "file_general": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "logs/general.log",
+            "maxBytes": 1024*1024*5,  # 5MB
+            "backupCount": 3,
+            "formatter": "standard",
+            "level": "INFO"
+        },
+        "file_errors": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "logs/errors.log", 
+            "maxBytes": 1024*1024*5,
+            "backupCount": 3,
+            "formatter": "verbose",
+            "level": "WARNING"
+        },
+        "file_trades": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "logs/trades.log",
+            "maxBytes": 1024*1024*5,
+            "backupCount": 3,
+            "formatter": "standard",
+            "level": "INFO"
+        }
+    },
+    
+    "loggers": {
+        "": {  # root logger
+            "handlers": ["console", "file_general"],
+            "level": "INFO",
+            "propagate": True
+        },
+        "exchange": {
+            "handlers": ["file_general"],
+            "level": "DEBUG",
+            "propagate": False
+        },
+        "trades": {
+            "handlers": ["file_trades"],
+            "level": "INFO",
+            "propagate": False
+        }
+    }
+}
 
 # Настройки подключения
 OKX_TESTNET = os.getenv("OKX_TESTNET", "true").lower() == "true"

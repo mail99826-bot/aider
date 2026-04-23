@@ -15,11 +15,13 @@ class RiskManager:
         # Инициализация логгера
         self.logger = logger or TradeLogger()
 
-        self.logger.log_info("🛡️  Менеджер рисков инициализирован")
-        self.logger.log_info(f"   Макс. размер позиции: {self.max_position_size}")
-        self.logger.log_info(f"   Стоп-лосс: {self.stop_loss_percent}%")
-        self.logger.log_info(f"   Тейк-профит: {self.take_profit_percent}%")
-        self.logger.log_info(f"   Риск на сделку: {self.risk_per_trade*100}%")
+        params = {
+            "Макс. размер позиции": self.max_position_size,
+            "Стоп-лосс (%)": self.stop_loss_percent,
+            "Тейк-профит (%)": self.take_profit_percent,
+            "Риск на сделку (%)": self.risk_per_trade * 100
+        }
+        self.logger.log_info("Менеджер рисков инициализирован", extra={"params": params})
 
     def calculate_position_size(self, balance, current_price):
         """
