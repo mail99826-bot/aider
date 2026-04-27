@@ -1,7 +1,7 @@
 const playlist = {
-    title: "Курс по веб-разработке",
+    title: "Зеленый плейлист",
     lessons: [
-        { name: "Введение в HTML", videoId: "pQN-pnXPaVg" },
+        { name: "Урок 2", videoId: "RA5Asetv-cs" },
         { name: "Основы CSS", videoId: "OXGznpK1mIo" },
         { name: "JavaScript основы", videoId: "PkZNo7MFNFg" },
         { name: "React для начинающих", videoId: "Ke90Tje7VS0" },
