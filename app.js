@@ -80,15 +80,24 @@ document.addEventListener('DOMContentLoaded', () => {
         notesEditor.addEventListener('keydown', handleEditorKeyDown);
         
         function handleEditorInput(e) {
-            lines = notesEditor.textContent.replace(/\n$/, '').split('\n');
-            renderLineNumbers();
+            updateLines();
         }
         
         function handleEditorKeyDown(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 insertNewLine();
+                updateLines();
             }
+        }
+
+        function updateLines() {
+            // Получаем все div элементы внутри редактора (каждая строка - это div)
+            const lineNodes = notesEditor.querySelectorAll('div');
+            lines = Array.from(lineNodes).map(div => 
+                div.textContent === '\n' ? '' : div.textContent
+            );
+            renderLineNumbers();
         }
         
         function insertNewLine() {
@@ -127,7 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         function renderEditor() {
-            renderLineNumbers();
+            // Создаем начальную пустую строку
+            const initialLine = document.createElement('div');
+            initialLine.innerHTML = '<br>';
+            notesEditor.appendChild(initialLine);
+            updateLines();
             notesEditor.focus();
         }
         
