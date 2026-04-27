@@ -75,19 +75,31 @@ body {
 }
 
 .line-numbers {
-    padding: 10px;
+    padding: 10px 5px;
     border-right: 1px solid var(--border-color);
     text-align: right;
     user-select: none;
     color: var(--line-number-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.line-numbers div {
+    height: 1.5em;
+    line-height: 1.5em;
 }
 
 .notes-editor {
     padding: 10px;
     white-space: pre-wrap;
     outline: none;
-    line-height: 1.5;
+    line-height: 1.5em;
     overflow-wrap: break-word;
+}
+
+.notes-editor div {
+    min-height: 1.5em;
 }
 
 .theme-toggle {

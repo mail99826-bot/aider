@@ -148,6 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
             lineNumbers.innerHTML = lines.map((_, i) => 
                 `<div>${i + 1}</div>`
             ).join('');
+            
+            // Синхронизируем высоту редактора и нумерации
+            lineNumbers.style.height = notesEditor.scrollHeight + 'px';
         }
     }
 
