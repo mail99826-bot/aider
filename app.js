@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
         lessons: [
             { name: "Введение в HTML", videoId: "pQN-pnXPaVg" },
             { name: "Основы CSS", videoId: "OXGznpK1mIo" },
-            { name: "JavaScript основы", videoId: "PkZNo7MFNFg" }
+            { name: "JavaScript основы", videoId: "PkZNo7MFNFg" },
+            // Добавляйте новые уроки здесь
+            // { name: "Название урока", videoId: "КОД_ВИДЕО" }
         ]
     };
 
