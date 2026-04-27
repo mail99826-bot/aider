@@ -6,6 +6,7 @@ const playlist = {
         { name: "JavaScript основы", videoId: "PkZNo7MFNFg" },
         { name: "React для начинающих", videoId: "Ke90Tje7VS0" },
         { name: "Node.js введение", videoId: "TlB_eWDSMt4" },
+        { name: "Новый урок", videoId: "КОД_ВИДЕО" },
         // Добавляйте новые уроки здесь
         // Формат: { name: "Название урока", videoId: "КОД_ВИДЕО" }
     ]
