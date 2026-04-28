@@ -2,11 +2,11 @@ const playlist = {
     title: "Зеленый плейлист",
     lessons: [
         { name: "Урок 2", videoId: "RA5Asetv-cs" },
-        { name: "Основы CSS", videoId: "OXGznpK1mIo" },
-        { name: "JavaScript основы", videoId: "PkZNo7MFNFg" },
-        { name: "React для начинающих", videoId: "Ke90Tje7VS0" },
-        { name: "Node.js введение", videoId: "TlB_eWDSMt4" },
-        { name: "Урок 1", videoId: "RA5Asetv-cs" },
+        { name: "Урок 4", videoId: "cBNbBnY3nl0" },
+        { name: "Урок 6", videoId: "ezv7-2x2EfU" },
+        { name: "Урок 8", videoId: "opohDqzwTr8" },
+        { name: "Урок 9", videoId: "8doWvNB56Kw" },
+        { name: "тест", videoId: "RA5Asetv-cs" },
         // Добавляйте новые уроки здесь
         // Формат: { name: "Название урока", videoId: "КОД_ВИДЕО" }
     ]
